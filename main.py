@@ -1,37 +1,32 @@
 from add import add_flight
 from book import book_ticket
 from flight_data import flights
-from view import view_flight_details  # Import the view function
-from report import generate_flight_report  # Import the report function
+from view import view_flight_details  
+from report import generate_flight_report  
 
 def main():
+    print("Welcome to the Airlines Management System!\n")
+    
     while True:
-        print("\nWelcome to the Airline Management System!")
-        print("\nWhat would you like to do?")
-        print("1. Add")
-        print("2. Book")
-        print("3. View Flight Details")
-        print("4. Generate Flight Report")
-        print("5. Exit")
-
-        try:
-            choice = int(input("Enter your choice: "))
-            if choice == 1:
-                add_flight()
-            elif choice == 2:
-                book_ticket()
-            elif choice == 3:
+        action = input("What would you like to do? (add/book/view/report/exit): ").strip().lower()
+        
+        if action == "add":
+            add_flight()
+        elif action == "book":
+            book_ticket()
+        elif action == "view":
+            try:
                 flight_number = int(input("Enter flight number: "))
-                view_flight_details(flight_number)  # Call the view flight details function
-            elif choice == 4:
-                generate_flight_report()  # Call the report function
-            elif choice == 5:
-                print("Thank you for using the Airline Management System!")
-                break
-            else:
-                print("Invalid choice. Please select a valid option.")
-        except ValueError:
-            print("Invalid input. Please enter a numeric value for the choice.")    
+                view_flight_details(flight_number)  
+            except ValueError:
+                print("Invalid input. Please enter a numeric value for the flight number.")
+        elif action == "report":
+            generate_flight_report()  
+        elif action == "exit":
+            print("Thank you for using the Airlines Management System!")
+            break
+        else:
+            print("Invalid choice. Please select a valid option.")
 
 # Run the program
 if __name__ == "__main__":
